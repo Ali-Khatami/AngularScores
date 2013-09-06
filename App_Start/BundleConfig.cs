@@ -28,8 +28,8 @@ namespace AngularScores
 				)
 			);
 
-			// minify and bundle baby
-			//BundleTable.EnableOptimizations = true;
+			// turn off minication to avoid issues with angular.js file
+			BundleTable.EnableOptimizations = false;
 		}
 	}
 }
