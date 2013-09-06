@@ -9,6 +9,16 @@
     </head>
     <body ng-app>
 		@RenderBody()
+		<script type="text/javascript">
+			String.prototype.resolveUrl = function () {
+				var baseUrl = '@Html.Raw(VirtualPathUtility.ToAbsolute("~/"))';
+				var newUrl = this;
+				if (!!newUrl && newUrl.charAt(0) == '~') {
+					newUrl = newUrl.replace('~/', baseUrl);
+				}
+				return newUrl;
+			};
+		</script>
         @Scripts.Render("~/bundles/3rdparty", "~/bundles/SiteCommon")
         @RenderSection("scripts", required: false)
     </body>

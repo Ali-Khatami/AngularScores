@@ -76,7 +76,7 @@
 		$scope.xhrQueue[sXHRQueueKey] = $q.defer();
 
 		// update the student
-		$http.put('/AngularScores/API/Students/' + student.id, student, { timeout: $scope.xhrQueue[sXHRQueueKey].promise })
+		$http.put('~/API/Students/'.resolveUrl() + student.id, student, { timeout: $scope.xhrQueue[sXHRQueueKey].promise })
 		.success(function (data, status, headers, config)
 		{
 			// we only care if there are errors
@@ -96,7 +96,7 @@
 	{
 		var arStudentsToKeep = [];
 
-		$http.delete('/AngularScores/API/Students/' + student.id)
+		$http.delete('~/API/Students/'.resolveUrl() + student.id)
 		.success(function (data, status, headers, config)
 		{
 			if (status == 200)
@@ -113,7 +113,7 @@
 	// action - grabs all the users from the server and sets the $scope property
 	$scope.getAllStudents = function ()
 	{
-		$http.get('/AngularScores/API/Students/')
+		$http.get('~/API/Students/'.resolveUrl())
 		.success(function (data, status, headers, config)
 		{
 			$scope.students = data;
@@ -139,7 +139,7 @@
 		// make sure the form is valid before creating a user
 		if (!newStudentForm.$valid || !$scope.validateStudent(newStudent)) { return; }
 		
-		$http.post('/AngularScores/API/Students', newStudent)
+		$http.post('~/API/Students'.resolveUrl(), newStudent)
 		.success(function (savedStudent, status, headers, config) { $scope.addStudent_success(newStudent, savedStudent, status, headers, config); })
 		.error($scope.addStudent_error);
 	};
