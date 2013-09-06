@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Angular Score UI";
+}
+
+<section class="container" ng-controller="StudentsController">
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1 col-small-12 col-small-offset-0">
+			<div class="row class-summary-container">
+				<div class="col-sm-4 col-md-4">
+					<div class="score-block">
+						<h5>Top Score</h5>
+						<h1>
+							{{grades.maxDisplay}}
+						</h1>
+					</div>
+				</div>
+				<div class="col-sm-4 col-md-4">
+					<div class="score-block">
+						<h5>Worst Score</h5>
+						<h1>
+							{{grades.minDisplay}}
+						</h1>
+					</div>
+				</div>
+				<div class="col-sm-4 col-md-4">
+					<div class="score-block">
+						<h5>Average</h5>
+						<h1>
+							{{grades.avgDisplay}}
+						</h1>
+					</div>
+				</div>
+			</div>
+			<div class="row class-table-container">
+				<div class="md-col-12">
+					<section class="student-table-section">
+						<div class="table-responsive">
+							<table class="table table-striped" ng-init="summarize()">
+								<thead>
+									<tr>
+										<th class="name">
+											<a href="javascript:void(0);" title="Click to sort by student name" ng-click="predicate = 'name'; reverse=!reverse">Student</a>
+										</th>
+										<th class="grade">
+											<a href="javascript:void(0);" title="Click to sort by student grade" ng-click="predicate = 'grade'; reverse=!reverse">Grade (%)</a>
+										</th>
+										<th class="action" colspan="2">
+											<form name="newStudentForm" class="form-inline error" role="form" ng-submit="addStudent(newStudentForm, newStudent)">
+												<span class="help-block error" ng-show="newStudentForm.grade.$error.pattern">Invalid Grade!</span>
+												<div class="form-group">
+													<label class="sr-only" for="newStudentName">Student Name</label>
+													<input type="text" name="name" class="form-control" ng-model="newStudent.name" required id="newStudentName" placeholder="Enter student name" />
+												</div>
+
+												<div class="form-group">
+													<label class="sr-only" for="studentTestScore">Test Score</label>
+													<input type="text" class="form-control" name="grade" ng-model="newStudent.grade" ng-pattern="gradeRegex" required id="studentTestScore" placeholder="0-100" />
+												</div>
+
+												<button ng-disabled="!newStudentForm.$valid" type="submit" class="btn btn-info btn-md" title="Click to add another student">Add</button>
+											</form>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="student in students | orderBy:predicate:reverse" ng-class="student.cssClass">
+										<td class="name">
+											<div class="form-group">
+												<label class="sr-only" for="newStudentName">{{student.name}}</label>
+												<input class="form-control" type="text" ng-model="student.name" ng-keyup="summarize()" ng-blur="summarize()"  />
+											</div>
+										</td>
+										<td class="grade">
+											<div class="form-group">
+												<label class="sr-only" for="newStudentName">{{student.grade}}</label>
+												<input type="text" class="form-control" ng-model="student.grade" ng-keyup="summarize()" ng-blur="summarize()" />
+											</div>
+										</td>
+										<td class="message">
+											{{student.message || "&nbsp;"}}
+										</td>
+										<td class="remove">
+											<a href="javascript:void(0);" title="Click to remove {{student.name}} from the list of students" ng-click="removeStudent(student)"><span class="glyphicon glyphicon-remove-circle"></span></a>
+										</td>
+									</tr>
+									<tr ng-show="(!students || students.length == 0)">
+										<td colspan="4">There are no students. Add some!</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

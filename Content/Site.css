@@ -1,0 +1,96 @@
+﻿div.class-summary-container
+{
+	background-color: #31b0d5;
+	padding: 20px 0px;
+}
+
+	div.class-summary-container div.score-block
+	{
+		background-color:#57BEDD;
+		padding: 10px;
+	}
+
+	div.class-summary-container div.score-block h5
+	{
+		color: #ddd;
+		margin-bottom: 3px;
+	}
+
+	div.class-summary-container div.score-block h1
+	{
+		color: #fff;
+		margin-top: 0px;
+	}
+
+section.student-table-section
+{
+}
+
+	section.student-table-section table
+	{
+		margin-bottom: 0px;
+	}
+
+		section.student-table-section table th,
+		section.student-table-section table td
+		{
+			width: 10%;
+			vertical-align: middle;
+		}
+
+			section.student-table-section table th.name,
+			section.student-table-section table td.name
+			{
+				width: 30%;
+			}
+
+			section.student-table-section table th.grade,
+			section.student-table-section table td.grade
+			{
+				width: 10%;
+			}
+
+			section.student-table-section table th.action
+			{
+				text-align: right;
+				padding-right: 0px;
+				width: 60%;
+			}
+
+			section.student-table-section table td.message
+			{
+				width: 30%;
+				font-size: 12px;
+			}
+
+			section.student-table-section table td.remove
+			{
+				text-align: right;
+			}
+
+				section.student-table-section table td.remove a
+				{
+					font-size: 24px;
+				}
+
+			section.student-table-section table td div.form-group
+			{
+				margin-bottom: 0px;
+			}
+
+		section.student-table-section table tr.summary-title-row th
+		{
+			border-bottom: 0 none;
+			background-color: #31b0d5;
+			color: #fff;
+			font-size: 12px;
+		}
+
+		section.student-table-section table tr.summary-value-row th
+		{
+			font-size: 14px;
+			padding-bottom: 4px;
+			padding-top: 4px;
+			background-color: #eee;
+			color: #666;
+		}
