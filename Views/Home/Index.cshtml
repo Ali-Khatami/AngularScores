@@ -5,7 +5,7 @@
 <section class="container" ng-controller="StudentsController">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1 col-small-12 col-small-offset-0">
-			<div class="row class-summary-container">
+			<div class="row class-summary-container" ng-init="summarize()">
 				<div class="col-sm-4 col-md-4">
 					<div class="score-block">
 						<h5>Top Score</h5>
@@ -35,14 +35,19 @@
 				<div class="md-col-12">
 					<section class="student-table-section">
 						<div class="table-responsive">
-							<table class="table table-striped" ng-init="summarize()">
+							<table class="table table-striped">
 								<thead>
 									<tr>
 										<th class="name">
-											<a href="javascript:void(0);" title="Click to sort by student name" ng-click="predicate = 'name'; reverse=!reverse">Student</a>
+											<a href="javascript:void(0);" title="Click to sort by student name" ng-click="predicate = 'name'; reverse=!reverse">
+												Student <span ng-show="predicate == 'name'" class="glyphicon" ng-class="{'glyphicon-chevron-up': !reverse, 'glyphicon-chevron-down': reverse}"></span>
+											</a>
 										</th>
 										<th class="grade">
-											<a href="javascript:void(0);" title="Click to sort by student grade" ng-click="predicate = 'grade'; reverse=!reverse">Grade (%)</a>
+											<a href="javascript:void(0);" title="Click to sort by student grade" ng-click="predicate = 'grade'; reverse=!reverse">
+												Grade (%)
+												 <span ng-show="predicate == 'grade'" class="glyphicon" ng-class="{'glyphicon-chevron-up': !reverse, 'glyphicon-chevron-down': reverse}"></span>
+											</a>
 										</th>
 										<th class="action" colspan="2">
 											<form name="newStudentForm" class="form-inline error" role="form" ng-submit="addStudent(newStudentForm, newStudent)">

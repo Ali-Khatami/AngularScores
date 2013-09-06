@@ -30,12 +30,14 @@
 	$scope.STUDENT_HAS_HIGHEST_GRADE_MESSAGE = "Student received highest grade on the test!";
 	$scope.STUDENT_FAILING_GRADE_MESSAGE = "Student received a failing grade on the test, perhaps they need some more help?";
 	$scope.STUDENT_OVER_100 = "Student received a grade above 100%. We don't allow extra credit."
+	$scope.STUDENT_UNDER_0 = "Student received a grade below 0%. Maybe you should ease up on the grading?"
 
 	// dictionary of keys and deferred AJAX calls
 	$scope.xhrQueue = {};
 	
-	// used for sorting...this is an awesome feature in angular
-	$scope.predicate = '-name';
+	// intialize the sorting parameters
+	$scope.predicate = 'name';
+	$scope.reverse = false;
 
 	// simple validation method to see if we should or should not save a user
 	$scope.validateStudent = function (student, bCheckID)
@@ -115,6 +117,14 @@
 		.success(function (data, status, headers, config)
 		{
 			$scope.students = data;
+
+			if (!$scope.students || !$scope.students.length)
+			{
+				// reset the sorting if there are no students
+				$scope.predicate = 'name';
+				$scope.reverse = false;
+			}
+
 			$scope.summarize();
 		})
 		.error(function (data, status, headers, config)
@@ -182,10 +192,15 @@
 					student.message = $scope.STUDENT_OVER_100;
 					student.cssClass = 'danger';
 				}
+				else if (student.grade < 0)
+				{
+					student.message = $scope.STUDENT_UNDER_0;
+					student.cssClass = 'danger';
+				}
 				else
 				{
 					// the value may have been mistyped unless the teacher allows extra credit
-					if (student.grade < 65 && student.grade >= 0)
+					if (student.grade < 65)
 					{
 						student.cssClass = 'warning';
 						student.message = $scope.STUDENT_FAILING_GRADE_MESSAGE;
