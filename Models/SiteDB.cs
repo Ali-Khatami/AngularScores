@@ -8,7 +8,7 @@ namespace AngularScores.Models
 {
 	public class SiteDB : DbContext
 	{
-		public SiteDB() : base("DefaultConnection") { }
+		public SiteDB() : base("AngularScores") { }
 
 		public DbSet<Student> Students { get; set; }
 	}
