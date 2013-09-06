@@ -19,8 +19,8 @@ namespace AngularScores
 		protected void Application_Start()
 		{
 			// Empy the database if someone makes a change
-			Database.SetInitializer<SiteDB>(new DropCreateDatabaseIfModelChanges<SiteDB>());
-			//Database.SetInitializer<SiteDB>(new DropCreateDatabaseAlways<SiteDB>());
+			//Database.SetInitializer<SiteDB>(new DropCreateDatabaseIfModelChanges<SiteDB>());
+			Database.SetInitializer<SiteDB>(new DropCreateDatabaseAlways<SiteDB>());
 			//Database.SetInitializer<SiteDB>(null);
 
 			AreaRegistration.RegisterAllAreas();
