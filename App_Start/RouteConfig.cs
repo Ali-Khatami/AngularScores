@@ -13,6 +13,9 @@ namespace AngularScores
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+			//ignore the docs directory
+			routes.IgnoreRoute("content/docs/{*pathInfo}");
+
 			routes.MapRoute(
 				name: "Default",
 				url: "{controller}/{action}/{id}",
